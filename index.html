@@ -1,0 +1,300 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Rumbo a mi Camino — Test Vocacional (Alcaldía de Medellín)</title>
+<style>
+  :root{
+    --bg:#0b1f17;
+    --card:#0f2a21;
+    --muted:#98a9a3;
+    --fg:#e7f5ef;
+    --accent:#22c55e;
+    --accent-2:#16a34a;
+    --brand:#176b4d;
+    --brand-dark:#0b4e32;
+    --chip:#113c2f; --chip2:#165a44;
+  }
+  *{box-sizing:border-box}
+  body{
+    font-family:system-ui,-apple-system,Segoe UI,Roboto,Ubuntu,'Helvetica Neue',Arial,'Noto Sans',sans-serif;
+    margin:0;background:linear-gradient(180deg,#0b1f17,#0a1612 40%, #0b1f17 100%);color:var(--fg);
+  }
+  header{
+    position:sticky;top:0;z-index:10;
+    background:linear-gradient(90deg,var(--brand-dark),var(--brand));
+    border-bottom:1px solid rgba(255,255,255,.08);
+    box-shadow:0 2px 12px rgba(0,0,0,.25);
+  }
+  header .wrap{max-width:980px;margin:auto;padding:12px 16px;display:flex;gap:12px;align-items:center;justify-content:space-between}
+  .brand{display:flex;gap:14px;align-items:center}
+  .logo{width:42px;height:42px;border-radius:10px;background:#e7f5ef;color:#0b1f17;display:grid;place-items:center;font-weight:900;letter-spacing:-0.5px;box-shadow:0 0 0 3px rgba(0,0,0,.15)}
+  .itxt .org{font-weight:800;line-height:1}
+  .itxt .sub{font-size:.82rem;opacity:.85}
+  .badge{display:inline-block;padding:4px 10px;border-radius:999px;background:#0d2a1f;color:#b9ffe0;border:1px solid #217a4f;font-size:.78rem}
+  main{max-width:980px;margin:0 auto;padding:24px 16px 96px}
+  .card{background:linear-gradient(180deg,var(--card),#0b2019);border:1px solid rgba(255,255,255,.08);border-radius:18px;padding:20px;box-shadow:0 10px 30px rgba(0,0,0,.25)}
+  h1{font-size:1.6rem;margin:0 0 10px}
+  h2{font-size:1.2rem;margin:0 0 8px;color:#c9ffe2}
+  p.lead{color:var(--muted);margin-top:0}
+  .pill{display:inline-block;padding:4px 10px;border-radius:999px;border:1px solid #1b6b48;background:#0f3a2b;color:#bfffe7;font-size:.78rem}
+  .grid{display:grid;gap:16px}
+  @media(min-width:780px){ .grid{grid-template-columns:1fr 1fr} }
+  .question{padding:14px;border:1px solid rgba(255,255,255,.08);border-radius:14px;background:#0c1f18}
+  .qhead{display:flex;align-items:center;justify-content:space-between;gap:10px;margin-bottom:10px}
+  .dim{font-size:.8rem;color:#c7fce7;background:#0c3a2b;border:1px solid #1b6b48;padding:2px 8px;border-radius:999px}
+  .area{font-size:.75rem;color:#fde68a;background:#3b2f0b;border:1px solid #a16207;padding:2px 8px;border-radius:999px}
+  .likert{display:flex;justify-content:space-between;gap:6px}
+  .likert label{flex:1;text-align:center;background:#0a1d16;padding:10px;border-radius:10px;border:1px solid rgba(255,255,255,.08);cursor:pointer;color:#9ec7b9}
+  .likert input{display:none}
+  .likert input:checked + span{display:block;background:#0d361f;border-color:#1b6b48;color:#9ff2c8;font-weight:800}
+  .actions{position:sticky;bottom:0;background:linear-gradient(180deg,rgba(11,31,23,.92),rgba(11,31,23,.92));backdrop-filter: blur(6px);border-top:1px solid rgba(255,255,255,.08);padding:12px 16px;display:flex;gap:10px;justify-content:space-between;align-items:center}
+  button.primary{background:linear-gradient(90deg,var(--accent),var(--accent-2));color:#052e16;border:none;padding:12px 16px;border-radius:12px;font-weight:900;cursor:pointer}
+  button.ghost{background:#0e231b;color:#d3efe5;border:1px solid rgba(255,255,255,.12);padding:12px 14px;border-radius:12px;cursor:pointer}
+  .results{margin-top:20px}
+  .bar{height:12px;background:#0b223f;border:1px solid rgba(255,255,255,.08);border-radius:999px;overflow:hidden}
+  .bar > div{height:100%;background:linear-gradient(90deg,#22c55e,#16a34a)}
+  .score-row{display:flex;align-items:center;gap:10px;margin:10px 0}
+  .score-row .lab{width:220px;min-width:160px}
+  .muted{color:var(--muted)}
+  .profile{border:1px solid rgba(255,255,255,.08);border-radius:16px;padding:14px;margin-top:10px;background:#0a1e17}
+  .two-cols{display:grid;gap:14px}
+  @media(min-width:900px){ .two-cols{grid-template-columns:1fr 1fr} }
+  .print-note{font-size:.85rem;color:#b7c9c2}
+  .hidden{display:none}
+  footer{max-width:980px;margin:24px auto 40px;padding:0 16px;color:#a9cabe;font-size:.85rem}
+  .secondary-link{display:inline-block;margin-left:8px;text-decoration:none}
+</style>
+</head>
+<body>
+<header>
+  <div class="wrap">
+    <div class="brand">
+      <div class="logo" aria-hidden="true">M</div>
+      <div class="itxt">
+        <div class="org">Alcaldía de Medellín — Secretaría de Educación</div>
+        <div class="sub">Orientación Vocacional · Proyecto de Vida</div>
+      </div>
+    </div>
+    <div class="badge">Aplicación inmediata · Móvil</div>
+  </div>
+</header>
+
+<main>
+  <section class="card">
+    <h1>Rumbo a mi Camino — Test Vocacional</h1>
+    <p class="lead">Escanea el QR, responde con sinceridad y conoce tus <strong>dos perfiles</strong> más fuertes con rutas sugeridas (SENA · Técnica · Universitaria). Duración: 12–15 minutos.</p>
+    <div class="grid">
+      <div><span class="pill">Dimensiones</span> Intereses · Habilidades · Valores</div>
+      <div><span class="pill">Áreas</span> Científica · Artística · Social · Emprendedora · Técnica · Administrativa</div>
+    </div>
+  </section>
+
+  <form id="testForm" class="card" style="margin-top:16px">
+    <h2>Sección única (36 ítems)</h2>
+    <p class="muted">Escala de 1 (Nada) a 5 (Mucho). Toca el número que mejor te represente.</p>
+    <div id="questions"></div>
+  </form>
+
+  <section id="resultsCard" class="card results hidden" aria-live="polite">
+    <h2>Resultados inmediatos</h2>
+    <div id="summary"></div>
+    <div id="bars"></div>
+    <div class="two-cols">
+      <div id="profilePrimary" class="profile"></div>
+      <div id="profileSecondary" class="profile"></div>
+    </div>
+    <div class="profile">
+      <h3 style="margin-top:0">Tus siguientes pasos (elige 2 en las próximas 2 semanas)</h3>
+      <ol>
+        <li>Busca 2 programas afines a tu perfil (SENA, técnica o universitaria) y compara requisitos.</li>
+        <li>Habla con alguien que estudie/trabaje en ese campo y pregúntale por retos reales.</li>
+        <li>Realiza una actividad de exploración: curso corto, voluntariado o prototipo.</li>
+      </ol>
+      <p class="print-note">Consejo: usa <strong>Imprimir/Guardar PDF</strong> para registrar tus resultados.</p>
+      <div style="margin-top:8px">
+        <button id="btnPrint" class="ghost" type="button">Imprimir / Guardar PDF</button>
+        <a id="btnRedirect" class="secondary-link pill" href="#" target="_blank" rel="noopener">Explorar ofertas (configura enlace)</a>
+      </div>
+    </div>
+  </section>
+</main>
+
+<div class="actions">
+  <div id="progress" class="muted">0 / 36 respondidas</div>
+  <div style="display:flex;gap:8px;flex-wrap:wrap">
+    <button class="ghost" id="btnClear" type="button">Borrar</button>
+    <button class="primary" id="btnSubmit" type="button">Ver mi resultado</button>
+  </div>
+</div>
+
+<footer>
+  <p><strong>Privacidad:</strong> el cálculo se realiza en tu dispositivo. No se envían datos.</p>
+  <p class="muted">Versión institucional Alcaldía de Medellín. Puedes personalizar nombre, subtítulo, paleta y el enlace de “Explorar ofertas”.</p>
+</footer>
+
+<script>
+const AREAS = {
+  CIENTIFICA: { key:'CIENTIFICA', label:'Científica / Investigativa', color:'#22c55e' },
+  ARTISTICA:  { key:'ARTISTICA', label:'Artística / Creativa',        color:'#a78bfa' },
+  SOCIAL:     { key:'SOCIAL', label:'Social / Humanista',              color:'#60a5fa' },
+  EMPRENDEDORA:{ key:'EMPRENDEDORA', label:'Emprendedora / Liderazgo', color:'#f59e0b' },
+  TECNICA:    { key:'TECNICA', label:'Técnica / Práctica',             color:'#34d399' },
+  ADMIN:      { key:'ADMIN', label:'Administrativa / Organizativa',    color:'#f472b6' }
+};
+const DIM = { INTERESES:'Intereses', HABILIDADES:'Habilidades', VALORES:'Valores' };
+
+const ITEMS = [
+  {id:'c_int_1', text:'Me emociona descubrir cómo funcionan las cosas y comprobar ideas con pruebas o experimentos.', area:'CIENTIFICA', dim:DIM.INTERESES},
+  {id:'c_int_2', text:'Me atraen temas como salud, ambiente, tecnología o ciencias naturales.', area:'CIENTIFICA', dim:DIM.INTERESES},
+  {id:'c_hab_1', text:'Comprendo conceptos complejos y puedo explicarlos con claridad.', area:'CIENTIFICA', dim:DIM.HABILIDADES},
+  {id:'c_hab_2', text:'Analizo datos o información y encuentro patrones o conclusiones.', area:'CIENTIFICA', dim:DIM.HABILIDADES},
+  {id:'c_val_1', text:'Valoro el conocimiento y la búsqueda de soluciones basadas en evidencia.', area:'CIENTIFICA', dim:DIM.VALORES},
+  {id:'c_val_2', text:'Me motiva mejorar la salud, el ambiente o la tecnología desde la investigación.', area:'CIENTIFICA', dim:DIM.VALORES},
+  {id:'a_int_1', text:'Disfruto crear historias, imágenes, música o expresarme de forma original.', area:'ARTISTICA', dim:DIM.INTERESES},
+  {id:'a_int_2', text:'Me inspira observar, imaginar y experimentar con formas, colores o sonidos.', area:'ARTISTICA', dim:DIM.INTERESES},
+  {id:'a_hab_1', text:'Transformo emociones o ideas en obras (dibujos, canciones, textos, actuaciones).', area:'ARTISTICA', dim:DIM.HABILIDADES},
+  {id:'a_hab_2', text:'Tengo buena sensibilidad estética y atención al detalle.', area:'ARTISTICA', dim:DIM.HABILIDADES},
+  {id:'a_val_1', text:'Necesito espacios para expresarme con libertad y creatividad.', area:'ARTISTICA', dim:DIM.VALORES},
+  {id:'a_val_2', text:'Quiero comunicar y provocar emociones a través del arte o el diseño.', area:'ARTISTICA', dim:DIM.VALORES},
+  {id:'s_int_1', text:'Me gusta acompañar, enseñar o apoyar a otras personas.', area:'SOCIAL', dim:DIM.INTERESES},
+  {id:'s_int_2', text:'Me interesan temas de bienestar, educación, derechos o comunidad.', area:'SOCIAL', dim:DIM.INTERESES},
+  {id:'s_hab_1', text:'Escucho con empatía y comprendo lo que otros sienten o piensan.', area:'SOCIAL', dim:DIM.HABILIDADES},
+  {id:'s_hab_2', text:'Me comunico con claridad y genero confianza en los demás.', area:'SOCIAL', dim:DIM.HABILIDADES},
+  {id:'s_val_1', text:'Me importa contribuir al bienestar común y la justicia social.', area:'SOCIAL', dim:DIM.VALORES},
+  {id:'s_val_2', text:'Valoro el trabajo colaborativo y el cuidado de los demás.', area:'SOCIAL', dim:DIM.VALORES},
+  {id:'e_int_1', text:'Me entusiasma proponer ideas, liderar equipos o crear proyectos propios.', area:'EMPRENDEDORA', dim:DIM.INTERESES},
+  {id:'e_int_2', text:'Me atraen los retos, las ventas o el mundo de los negocios y la innovación.', area:'EMPRENDEDORA', dim:DIM.INTERESES},
+  {id:'e_hab_1', text:'Tomo decisiones con seguridad y asumo responsabilidades.', area:'EMPRENDEDORA', dim:DIM.HABILIDADES},
+  {id:'e_hab_2', text:'Puedo convencer a otros y organizar recursos para lograr metas.', area:'EMPRENDEDORA', dim:DIM.HABILIDADES},
+  {id:'e_val_1', text:'Valoro la autonomía, los desafíos y la posibilidad de generar impacto.', area:'EMPRENDEDORA', dim:DIM.VALORES},
+  {id:'e_val_2', text:'Estoy dispuesto/a a asumir riesgos calculados para crecer.', area:'EMPRENDEDORA', dim:DIM.VALORES},
+  {id:'t_int_1', text:'Disfruto armar, reparar o manejar herramientas, máquinas o dispositivos.', area:'TECNICA', dim:DIM.INTERESES},
+  {id:'t_int_2', text:'Prefiero tareas prácticas con resultados concretos y visibles.', area:'TECNICA', dim:DIM.INTERESES},
+  {id:'t_hab_1', text:'Sigo instrucciones técnicas con precisión y cuido los detalles.', area:'TECNICA', dim:DIM.HABILIDADES},
+  {id:'t_hab_2', text:'Tengo buena coordinación mano-ojo y habilidades manuales.', area:'TECNICA', dim:DIM.HABILIDADES},
+  {id:'t_val_1', text:'Valoro la eficiencia, la seguridad y el trabajo bien hecho.', area:'TECNICA', dim:DIM.VALORES},
+  {id:'t_val_2', text:'Me gusta aprender haciendo y ver resultados prácticos.', area:'TECNICA', dim:DIM.VALORES},
+  {id:'ad_int_1', text:'Me gusta planear, organizar recursos y coordinar tareas.', area:'ADMIN', dim:DIM.INTERESES},
+  {id:'ad_int_2', text:'Prefiero entornos con reglas claras, procesos y metas definidas.', area:'ADMIN', dim:DIM.INTERESES},
+  {id:'ad_hab_1', text:'Gestiono bien el tiempo, los datos y la información.', area:'ADMIN', dim:DIM.HABILIDADES},
+  {id:'ad_hab_2', text:'Soy cuidadoso/a con registros, presupuestos o logística.', area:'ADMIN', dim:DIM.HABILIDADES},
+  {id:'ad_val_1', text:'Valoro la estabilidad, el orden y la responsabilidad.', area:'ADMIN', dim:DIM.VALORES},
+  {id:'ad_val_2', text:'Me gusta cumplir metas y mejorar procesos paso a paso.', area:'ADMIN', dim:DIM.VALORES},
+];
+
+const PROFILES = {
+  CIENTIFICA: { title:'Explorador/a científico/a', desc:'Curiosidad y pensamiento analítico. Te mueven las preguntas y las soluciones basadas en evidencia.', rutas:['SENA: salud, análisis de laboratorio, programación','Universitaria: biología, ingeniería, medicina, ambientales','Técnica: sistemas, mecatrónica, electricidad'], pasos:['Únete a un semillero o feria de ciencia','Haz un curso corto de datos o programación','Lee divulgación científica y resume hallazgos'] },
+  ARTISTICA: { title:'Creador/a artístico/a', desc:'Sensibilidad estética y expresión simbólica. Te inspira comunicar emociones e ideas con originalidad.', rutas:['SENA: diseño, multimedia, fotografía','Universitaria: artes visuales, diseño, música, comunicación','Técnica: animación, ilustración, audio'], pasos:['Crea un portafolio con 6 piezas','Explora concursos o muestras locales','Documenta tu proceso creativo'] },
+  SOCIAL: { title:'Cuidador/a – Educador/a social', desc:'Empatía, escucha y cooperación. Tu motivación es el bienestar humano y comunitario.', rutas:['SENA: atención integral a la primera infancia, salud','Universitaria: educación, psicología, trabajo social, enfermería','Técnica: auxiliar de enfermería, recreación'], pasos:['Voluntariado o tutoría con niños/jóvenes','Curso de primeros auxilios o mediación','Diseña un mini-proyecto comunitario'] },
+  EMPRENDEDORA: { title:'Gestor/a – Emprendedor/a', desc:'Iniciativa, visión e impacto. Te gustan los retos, liderar y crear oportunidades.', rutas:['SENA: emprendimiento, mercadeo, ventas','Universitaria: administración, economía, negocios internacionales','Técnica: comercio, logística'], pasos:['Crea un MVP de una idea','Participa en ferias escolares de emprendimiento','Aprende finanzas personales básicas'] },
+  TECNICA: { title:'Constructor/a técnico/a', desc:'Orientación práctica y precisión. Disfrutas “aprender haciendo” y ver resultados concretos.', rutas:['SENA: mantenimiento, manufactura, redes y telecom','Universitaria: tecnologías e ingenierías','Técnica: instalaciones y operación de equipos'], pasos:['Arma o repara un dispositivo','Curso de seguridad industrial','Portafolio con 3 proyectos prácticos'] },
+  ADMIN: { title:'Gestor/a organizativo/a', desc:'Orden, responsabilidad y mejora de procesos. Te motivan la planificación y la eficiencia.', rutas:['SENA: contabilidad, archivo, gestión del talento humano','Universitaria: administración, contaduría, negocios','Técnica: logística, asistencia administrativa'], pasos:['Aprende hojas de cálculo','Organiza un evento pequeño','Crea un sistema personal de gestión del tiempo'] }
+};
+
+const qWrap = document.getElementById('questions');
+const progress = document.getElementById('progress');
+const form = document.getElementById('testForm');
+const resultsCard = document.getElementById('resultsCard');
+const bars = document.getElementById('bars');
+const summary = document.getElementById('summary');
+const profilePrimary = document.getElementById('profilePrimary');
+const profileSecondary = document.getElementById('profileSecondary');
+const btnRedirect = document.getElementById('btnRedirect');
+
+function renderQuestions(){
+  qWrap.innerHTML = '';
+  ITEMS.forEach((q, idx) => {
+    const areaLabel = AREAS[q.area].label;
+    const dim = q.dim;
+    const el = document.createElement('div');
+    el.className = 'question';
+    el.innerHTML = `
+      <div class="qhead">
+        <div class="dim">${dim}</div>
+        <div class="area">${areaLabel}</div>
+      </div>
+      <div style="margin-bottom:8px">${idx+1}. ${q.text}</div>
+      <div class="likert" role="radiogroup" aria-label="Escala de acuerdo">
+        ${[1,2,3,4,5].map(v => `
+          <label>
+            <input type="radio" name="${q.id}" value="${v}" aria-label="${v}">
+            <span>${v}</span>
+          </label>
+        `).join('')}
+      </div>
+    `;
+    qWrap.appendChild(el);
+  });
+}
+renderQuestions();
+
+function countAnswered(){
+  const filled = ITEMS.filter(q => form.querySelector(`input[name="${q.id}"]:checked`)).length;
+  progress.textContent = `${filled} / ${ITEMS.length} respondidas`;
+}
+form.addEventListener('change', countAnswered);
+countAnswered();
+
+document.getElementById('btnClear').addEventListener('click', () => {
+  form.reset();
+  countAnswered();
+  resultsCard.classList.add('hidden');
+  window.scrollTo({top:0, behavior:'smooth'});
+});
+
+document.getElementById('btnSubmit').addEventListener('click', () => {
+  const missing = ITEMS.filter(q => !form.querySelector(`input[name="${q.id}"]:checked`));
+  if(missing.length){
+    alert(`Aún te faltan ${missing.length} ítems por responder. Revisa y completa el test.`);
+    return;
+  }
+  const scores = { CIENTIFICA:0, ARTISTICA:0, SOCIAL:0, EMPRENDEDORA:0, TECNICA:0, ADMIN:0 };
+  ITEMS.forEach(q => {
+    const v = parseInt(form.querySelector(`input[name="${q.id}"]:checked`).value, 10);
+    scores[q.area] += v;
+  });
+  const maxPerArea = 30;
+  const entries = Object.entries(scores).map(([k, v]) => ({
+    key:k, label:AREAS[k].label, total:v, pct: Math.round(v / maxPerArea * 100)
+  })).sort((a,b)=>b.total-a.total);
+
+  const top1 = entries[0], top2 = entries[1];
+  summary.innerHTML = `
+    <p><span class="pill">Perfil principal</span> <strong>${top1.label}</strong> — ${PROFILES[top1.key].title}</p>
+    <p><span class="pill">Perfil complementario</span> <strong>${top2.label}</strong> — ${PROFILES[top2.key].title}</p>
+  `;
+
+  bars.innerHTML = entries.map(e => `
+    <div class="score-row">
+      <div class="lab">${e.label}</div>
+      <div class="bar" aria-label="${e.label} ${e.pct}%">
+        <div style="width:${e.pct}%; background: linear-gradient(90deg, ${AREAS[e.key].color}, ${AREAS[e.key].color})"></div>
+      </div>
+      <div style="width:48px;text-align:right">${e.pct}%</div>
+    </div>
+  `).join('');
+
+  function profileHTML(e){
+    const p = PROFILES[e.key];
+    return `
+      <h3 style="margin:0 0 6px 0">${p.title}</h3>
+      <p class="muted" style="margin:0 0 10px 0">${p.desc}</p>
+      <div><span class="pill">Rutas sugeridas</span></div>
+      <ul>${p.rutas.map(r=>`<li>${r}</li>`).join('')}</ul>
+      <div><span class="pill">Próximos pasos</span></div>
+      <ul>${p.pasos.map(r=>`<li>${r}</li>`).join('')}</ul>
+    `;
+  }
+  profilePrimary.innerHTML = profileHTML(top1);
+  profileSecondary.innerHTML = profileHTML(top2);
+
+  resultsCard.classList.remove('hidden');
+  resultsCard.scrollIntoView({behavior:'smooth'});
+});
+
+document.getElementById('btnPrint').addEventListener('click', () => window.print());
+</script>
+</body>
+</html>
